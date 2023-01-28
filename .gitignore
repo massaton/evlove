@@ -29,5 +29,5 @@ build/
 ### macOS ###
 .DS_Store
 
-### custom path ###
-/@devops/docker-volume/
+### Custom ignore path ###
+/@devops/docker-volume-tmp/
