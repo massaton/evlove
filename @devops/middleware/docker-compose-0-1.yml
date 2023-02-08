@@ -1,0 +1,56 @@
+# Note: You need to manually create a docker network before deployment - 'docker network create -d bridge evlove-net'
+version: "3"
+services:
+  # Hybrid Database - for use by both 'Infrastructure' and 'Business Services'
+  mix-db:
+    build:
+      # Use the directory where the current 'yml' is located as the starting directory for referencing external files
+      context: ""
+      dockerfile: mysql/Dockerfile
+    image: ${REGISTRY_ADDR:-evlove}/mix-db:${PROJECT_VERSION:-latest}
+    container_name: mix-db
+    restart: always
+    networks:
+      - evlove-net
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    # Since 8.0.4, MySQL's default authentication plugin is replaced with 'caching_sha2_password'
+    #
+    # The new plug-in caused MySQL-dependent applications to fail to connect to the database correctly
+    # after the first start of MySQL (return to normal after manual connection through Navicat),
+    # the cause of the problem is unclear, temporarily replaced with the 'mysql_native_password' plug-in.
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ../docker-volume/mysql:/var/lib/mysql
+    # Limit the log size (only applicable when the driver is json-file)
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+  # Cache
+  redis:
+    image: redis:6.2.10
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - ../docker-volume-tmp/redis/data:/data
+    # Start the command to pass parameters:
+    # --appendonly: Enable data persistence
+    # --requirepass: Initial password
+    # --maxclients: The maximum number of connections, the default is 10000
+    command: redis-server --appendonly yes --requirepass "123456" --maxclients 10000
+    # Limit the log size (only applicable when the driver is json-file)
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  evlove-net:
+    external: true
