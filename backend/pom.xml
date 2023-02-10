@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.0.2</version>
+    </parent>
+
+    <groupId>org.evlove.framework</groupId>
+    <artifactId>backend</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>common</module>
+        <module>monolith</module>
+        <module>gateway</module>
+        <module>microservices</module>
+        <module>example</module>
+    </modules>
+
+    <!--
+        Globally define the version number of the backend dependency
+        Dependent library version query：https://mvnrepository.com/
+    -->
+    <properties>
+        <!--
+            Specify the Java version used in the backend project, which has been specified in 'spring-boot-starter-parent'.
+            It is currently only used to display the version number, and it can also avoid the impact of SpringBoot upgrading
+            the minimum version number of Java later.
+        -->
+        <java.version>17</java.version>
+
+        <!-- Specify the Java version used by Maven when compiling -->
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <!-- Specify the character encoding used by Maven when compiling -->
+        <encoding>UTF-8</encoding>
+        <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
+        <maven.compiler.encoding>${encoding}</maven.compiler.encoding>
+
+        <!-- Generic snapshot version for internal Maven Module -->
+        <snapshot.version>1.0.0-SNAPSHOT</snapshot.version>
+
+        <!-- Specifies the version of each library that the backend depends on, as follows: -->
+        <!-- Related to Spring
+            Version adaptation relationship:
+                Spring Cloud         - 2022.0.1: "Spring Boot >=3.0.0 and <3.1.0-M1"
+                Spring Cloud Alibaba - 2022.0.0.0-RC1: "Spring Cloud >= 2022.0.0 and Spring Boot >= 3.0.0"
+
+            Version adaptation relationship query:
+                https://start.spring.io/actuator/info
+                https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E
+
+            About Spring Cloud Alibaba:
+                https://mp.weixin.qq.com/s/R3CVyxnJoR3xi9mGeXG-0A
+                The version number of Spring Cloud Alibaba corresponds to the version number of Spring Cloud:
+                the first three digits are the version number of Spring Cloud, and the last digit is the extended version.
+        -->
+        <spring-boot.version>3.0.2</spring-boot.version>
+        <spring-cloud.version>2022.0.1</spring-cloud.version>
+        <!-- TODO wait RELEASE version to publish -->
+        <spring-cloud-alibaba.version>2022.0.0.0-RC1</spring-cloud-alibaba.version>
+
+        <!-- Lombok - Simplify coding with annotations - https://projectlombok.org/ -->
+        <lombok.version>1.18.26</lombok.version>
+        <!-- Guava - Google Core Libraries for Java - https://github.com/google/guava/wiki  -->
+        <guava.version>31.1-jre</guava.version>
+        <!-- Hutool - Provides some tools in line with Chinese application scenarios - https://www.hutool.cn/ -->
+        <hutool.version>5.8.11</hutool.version>
+        <!-- jasypt - Encryption tool library, mainly used to encrypt configuration files(yml) - http://www.jasypt.org/ -->
+        <jasypt.version>3.0.5</jasypt.version>
+        <!-- For Swagger https://swagger.io/resources/open-api/ -->
+        <openapi-starter.version>2.0.2</openapi-starter.version>
+
+        <!-- MySQL related library -->
+        <mysql.version>8.0.32</mysql.version>
+        <mybatis-starter.version>3.0.1</mybatis-starter.version>
+        <mybatis-plus-starter.version>3.5.3.1</mybatis-plus-starter.version>
+        <!-- Alibaba's caching framework -->
+        <jetcache-starter.version>2.7.3</jetcache-starter.version>
+
+        <!-- TODO -->
+        <!-- Nacos client -->
+        <!-- RocketMQ client -->
+        <!-- Elasticsearch related library -->
+        <!-- Distributed Task Scheduling Platform -->
+
+    </properties>
+
+    <!-- Global dependencies (all backend projects need to depend) -->
+    <dependencies>
+        <!--
+            Lombok
+            Compile-time annotation processing needs to be enabled in IDEA:
+            Intellij IDEA -> Preferences... -> Build,Exection,Deployment -> Compiler -> Annotation Processors -> 选中Enable annotation processing
+        -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        <!-- All-around tool library - Guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+        <!-- All-around tool library - Hutool -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
+
+        <!-- Unit test library (only valid for Maven's test command) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring-boot.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!--
+        Version declaration of public dependencies
+        (list the possible dependencies of the backend, and agree on the version number here)
+    -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Related dependencies of SpringBoot application -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Internal capability modules of the EVLOVE framework -->
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <!-- Use artifactId as the file name of the jar package -->
+        <finalName>${project.artifactId}</finalName>
+
+        <!-- Unified introduction of necessary plug-ins -->
+        <plugins>
+            <!-- Package again according to the directory structure rules of the SpringBoot applicationn -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+            </plugin>
+            <!-- A plug-in that encrypts and decrypts confidential information in configuration files through the JASYPT library -->
+            <plugin>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-maven-plugin</artifactId>
+                <version>${jasypt.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>
