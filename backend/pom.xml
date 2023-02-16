@@ -73,10 +73,16 @@
         <guava.version>31.1-jre</guava.version>
         <!-- Hutool - Provides some tools in line with Chinese application scenarios - https://www.hutool.cn/ -->
         <hutool.version>5.8.11</hutool.version>
+        <!-- Java tuple tool - https://www.javatuples.org/ -->
+        <javatuples.version>1.2</javatuples.version>
         <!-- jasypt - Encryption tool library, mainly used to encrypt configuration files(yml) - http://www.jasypt.org/ -->
         <jasypt.version>3.0.5</jasypt.version>
-        <!-- For Swagger https://swagger.io/resources/open-api/ -->
-        <openapi-starter.version>2.0.2</openapi-starter.version>
+        <!--
+            For Swagger https://swagger.io/resources/open-api/
+            https://springdoc.org/v2/
+        -->
+        <springdoc-starter.version>2.0.2</springdoc-starter.version>
+        <swagger.version>2.2.7</swagger.version>
 
         <!-- MySQL related library -->
         <mysql.version>8.0.32</mysql.version>
@@ -117,6 +123,11 @@
             <artifactId>hutool-all</artifactId>
             <version>${hutool.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.javatuples</groupId>
+            <artifactId>javatuples</artifactId>
+            <version>${javatuples.version}</version>
+        </dependency>
 
         <!-- Unit test library (only valid for Maven's test command) -->
         <dependency>
@@ -153,12 +164,6 @@
 
         <!-- Unified introduction of necessary plug-ins -->
         <plugins>
-            <!-- Package again according to the directory structure rules of the SpringBoot applicationn -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
-            </plugin>
             <!-- A plug-in that encrypts and decrypts confidential information in configuration files through the JASYPT library -->
             <plugin>
                 <groupId>com.github.ulisesbocchio</groupId>
@@ -166,5 +171,16 @@
                 <version>${jasypt.version}</version>
             </plugin>
         </plugins>
+        <!-- Version declaration of public plugin -->
+        <pluginManagement>
+            <plugins>
+                <!-- Package again according to the directory structure rules of the SpringBoot application -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 </project>

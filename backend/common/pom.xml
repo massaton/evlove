@@ -16,6 +16,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>common-core-interface</module>
     </modules>
 
 </project>
