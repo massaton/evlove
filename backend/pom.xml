@@ -64,7 +64,7 @@
         -->
         <spring-boot.version>3.0.2</spring-boot.version>
         <spring-cloud.version>2022.0.1</spring-cloud.version>
-        <!-- TODO wait RELEASE version to publish -->
+        <!-- TODO Wait RELEASE version to publish -->
         <spring-cloud-alibaba.version>2022.0.0.0-RC1</spring-cloud-alibaba.version>
 
         <!-- Lombok - Simplify coding with annotations - https://projectlombok.org/ -->
@@ -154,7 +154,32 @@
             </dependency>
 
             <!-- Internal capability modules of the EVLOVE framework -->
+            <dependency>
+                <groupId>org.evlove.framework</groupId>
+                <artifactId>common-core-interface</artifactId>
+                <version>${snapshot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.evlove.framework</groupId>
+                <artifactId>common-bom-service</artifactId>
+                <version>${snapshot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.evlove.framework</groupId>
+                <artifactId>common-bom-microservice</artifactId>
+                <version>${snapshot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.evlove.framework</groupId>
+                <artifactId>common-bom-microservice-api</artifactId>
+                <version>${snapshot.version}</version>
+            </dependency>
 
+            <dependency>
+                <groupId>org.evlove.framework</groupId>
+                <artifactId>common-integrate-rdb</artifactId>
+                <version>${snapshot.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

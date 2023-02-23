@@ -6,21 +6,21 @@
 
     <parent>
         <groupId>org.evlove.framework</groupId>
-        <artifactId>backend</artifactId>
+        <artifactId>common</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>common</artifactId>
-    <name>Common Module</name>
+    <artifactId>common-bom-microservice</artifactId>
 
-    <packaging>pom</packaging>
+    <dependencies>
+        <!-- 依赖于基础的服务依赖 -->
+        <dependency>
+            <groupId>org.evlove.framework</groupId>
+            <artifactId>common-bom-service</artifactId>
+        </dependency>
 
-    <modules>
-        <module>common-core-interface</module>
-        <module>common-bom-service</module>
-        <module>common-bom-microservice</module>
-        <module>common-bom-microservice-api</module>
-        <module>common-integrate-rdb</module>
-    </modules>
+        <!-- 微服务相关依赖 -->
+
+    </dependencies>
 
 </project>

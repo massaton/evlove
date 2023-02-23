@@ -202,23 +202,27 @@ With the development of products, business complexity, user volume, and team siz
 
 EVLOVE adopts the "single-repo project structure" to support the "single-repo development pattern" and the evolution of the architectural style from monomer to microservice:
 
-- **@devops: **[Directory] -- Store DevOps suites, middleware, k8s deployment scripts, SQL scripts, and container data required for framework demonstrations.
-- **@doc: **[Directory] -- Documents such as instructions and experience summaries related to the use of the framework are stored.
-- **backend: **[Directory] -- General catalog of backend projects.
-  - **common: **[Directory] -- The general catalog of each module that abstracts and encapsulates the "development capability" of the backend service, and provides various basic dependencies of the backend project.
-  - **example: **[Directory] -- A general catalog of sample demo projects for framework capabilities or core scenarios.
-  - **gateway: **[Module] -- Gateway project.
-  - **microservices: **[Directory] -- General catalog of backend service layer projects.
-    - **layer-app: **[Directory] -- General catalog of application domain service layer (facing the foreground application).
-    - **layer-manage: **[Directory] -- General catalog of management domain service layer (facing the background application).
-    - **layer-mid: **[Directory]  -- General catalog of public/share domain service layer (middle planform application)
-    - **template: **[Module] -- The template of the Java microservice project, which is convenient and quick to create a microservice project.
-    - **template-go: **[Module] -- The template of the Go microservice project, is only used to demonstrate how the Go language creates microservices in EVLOVE.
-  - **monolith: **[Module] -- Monolithic service, used in 0-1 stage, relies on some technical capabilities in 'common', and can also obtain general business capabilities by relying on the project in 'layer-mid'.
-- **frontend: **[Directory] -- General catalog of frontend projects
-  - **app: **[Module] -- Mobile application project, the basic framework of mobile APP project based on the Flutter technology stack.
-  - **oms: **[Module] -- Background application on the web (Operation Management System), a basic framework based on the Vue technology stack.
-  - **official-website: **[Module] -- Website project example based on the Flutter technology stack.
-- **microsoft: **[Directory] -- Store some small software and small tools, such as "efficiency analysis based on GitLab", "API call statistics", etc.
-- **cicd.sh: **[File] Unified scheduling of differential compilation and deployment, is the entry script of CICD.
-- **docker-stack.yaml: **[File] -- Docker Swarm scripts, server-side project compilation relies on this script to process images, and development and test environment deployment rely on this script to deploy through Swarm.
+- **@devops:** [Directory] -- Store DevOps suites, middleware, k8s deployment scripts, SQL scripts, and container data required for framework demonstrations.
+- **@doc:** [Directory] -- Documents such as instructions and experience summaries related to the use of the framework are stored.
+- **backend:** [Directory] -- General catalog of backend projects.
+  - **common:** [Directory] -- The general catalog of each module that abstracts and encapsulates the "development capability" of the backend service, and provides various basic dependencies of the backend project.
+  - **example:** [Directory] -- A general catalog of sample demo projects for framework capabilities or core scenarios.
+  - **gateway:** [Module] -- Gateway project.
+  - **microservices:** [Directory] -- General catalog of backend service layer projects.
+    - **layer-app:** [Directory] -- General catalog of application domain service layer (facing the foreground application).
+    - **layer-manage:** [Directory] -- General catalog of management domain service layer (facing the background application).
+    - **layer-mid:** [Directory]  -- General catalog of public/share domain service layer (middle planform application)
+    - **template:** [Module] -- The template of the Java microservice project, which is convenient and quick to create a microservice project.
+    - **template-go:** [Module] -- The template of the Go microservice project, is only used to demonstrate how the Go language creates microservices in EVLOVE.
+  - **monolith:** [Module] -- Monolithic service, used in 0-1 stage, relies on some technical capabilities in 'common', and can also obtain general business capabilities by relying on the project in 'layer-mid'.
+- **frontend:** [Directory] -- General catalog of frontend projects
+  - **app:** [Module] -- Mobile application project, the basic framework of mobile APP project based on the Flutter technology stack.
+  - **oms:** [Module] -- Background application on the web (Operation Management System), a basic framework based on the Vue technology stack.
+  - **official-website:** [Module] -- Website project example based on the Flutter technology stack.
+- **microsoft:** [Directory] -- Store some small software and small tools, such as "efficiency analysis based on GitLab", "API call statistics", etc.
+- **cicd.sh:** [File] Unified scheduling of differential compilation and deployment, is the entry script of CICD.
+- **docker-stack.yaml:** [File] -- Docker Swarm scripts, server-side project compilation relies on this script to process images, and development and test environment deployment rely on this script to deploy through Swarm.
+
+## Address & Account
+- **Swagger**
+  - Address: http://server:port/context-path/v3/api-docs

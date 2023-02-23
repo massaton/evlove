@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.evlove.framework</groupId>
+        <artifactId>common</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>common-bom-service</artifactId>
+
+    <dependencies>
+        <!-- core interface -->
+        <dependency>
+            <groupId>org.evlove.framework</groupId>
+            <artifactId>common-core-interface</artifactId>
+        </dependency>
+
+        <!-- Web application related dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Replace the default Tomcat container with Undertow -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
+
+        <!--
+            The service layer integrates the dependency of relational database (RDB) by default.
+
+            If certain services do not need to integrate the database,
+            you can remove the dependency on common-integrate-rdb through <exclusion> in the dependent common-bom-service
+        -->
+        <dependency>
+            <groupId>org.evlove.framework</groupId>
+            <artifactId>common-integrate-rdb</artifactId>
+        </dependency>
+
+        <!-- ↓ Development Assistance ↓ -->
+        <!-- Support for injecting configuration parameters(yaml) through the @ConfigurationProperties annotation -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+        <!-- Generate the OpenAPI description without using the swagger-ui. https://springdoc.org/v2 -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+            <version>${springdoc-starter.version}</version>
+        </dependency>
+        <!-- Monitoring endpoint -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!-- Encrypt confidential information in yaml configuration -->
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+            <version>${jasypt.version}</version>
+        </dependency>
+    </dependencies>
+</project>
