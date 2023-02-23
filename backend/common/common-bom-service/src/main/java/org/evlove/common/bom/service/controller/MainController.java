@@ -76,14 +76,14 @@ public class MainController {
     }
 
     @Data
-    class ServiceInfoParam extends BaseParam {
+    static class ServiceInfoParam extends BaseParam {
         @Schema(title = "Purpose")
         private String purpose;
     }
 
     @Data
     @Builder
-    class ServiceInfoVO extends BaseVO {
+    static class ServiceInfoVO extends BaseVO {
         @Schema(title = "Custom return information")
         private String msg;
 

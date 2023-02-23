@@ -1,0 +1,60 @@
+server:
+  # 默认端口号，指定一个范围，避免和其它随机端口冲突（0：随机）
+  port: ${random.int[50000,59999]}
+  # 启用spring-boot的优雅停机（接收到`kill -2`关闭事件时，停止新请求的接收，等待进行中的请求完成）
+  shutdown: GRACEFUL
+  # Web容器的相关配置 - Undertow
+  undertow:
+    accesslog:
+      # 访问日志默认关闭
+      enabled: false
+    # 连接超时时间（单位：毫秒）
+    # 要大于网关的httpclient.pool.max-idle-time，防止后端服务关闭连接所导致的网关连接异常（Connection prematurely closed DURING response）
+    no-request-timeout: 60000
+
+# SpringDoc相关配置
+springdoc:
+  api-docs:
+    # 启用通过接口访问生成的接口文档（在预生产、生产中关闭）
+    enabled: true
+
+spring:
+  main:
+    # 允许相同注入名称的Bean进行覆盖
+    allow-bean-definition-overriding: true
+    # 允许循环依赖，JetCache v2.6.2存在循环依赖
+    allow-circular-references: true
+  application:
+    name: monolith
+    # 工程版本号，`@……@`表示读取pom.xml中的参数
+    # 需使用单引号包裹，否则jasypt插件运行时会报错：found character '@' that cannot start any token. (Do not use @ for indentation)
+    version: '@project.version@'
+  profiles:
+    # 默认加载dev环境配置
+    active: dev
+  lifecycle:
+    # 停机缓冲时间，超过指定的最大等待时间后，立即执行停机，默认30s
+    timeout-per-shutdown-phase: 20s
+  servlet:
+    # 文件上传相关配置
+    multipart:
+      # 单个文件的最大值
+      max-file-size: 10MB
+      # 请求中所有文件累加的最大值
+      max-request-size: 100MB
+      # 文件大小达到该阈值，将写入临时目录，默认为0，即所有文件都会直接写入磁盘临时文件中（小文件可以存储在内存中，以提高性能）。
+      file-size-threshold: 1MB
+      # 是否要延迟解析文件（默认：false，即当需要获取文件信息时才会去解析请求数据）
+      resolve-lazily: false
+
+logging:
+  level:
+    root: 'info'
+
+management:
+  endpoints:
+    web:
+      exposure:
+        # 开启监控端点（生产环境中关闭）
+        # 查看可以使用的监控端点： /actuator
+        include: "*"

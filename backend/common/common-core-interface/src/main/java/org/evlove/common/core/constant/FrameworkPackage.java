@@ -16,10 +16,10 @@ public class FrameworkPackage {
     /**
      * Public basic package path
      */
-    public static final String BASE = "com.evlove";
+    public static final String BASE = "org.evlove";
 
     /**
      * DAO layer package path
      */
-    public static final String MAPPER = "com.evlove.**.mapper";
+    public static final String MAPPER = "org.evlove.**.mapper";
 }

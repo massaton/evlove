@@ -1,0 +1,31 @@
+# Environment Configuration - production environment (prod)
+
+# SpringDoc相关配置
+springdoc:
+  api-docs:
+    # 关闭通过接口访问生成的接口文档
+    enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        # 关闭监控端点
+        exclude: '*'
+
+jasypt:
+  encryptor:
+    # 用于配置加密、解密的密钥
+    # 注意：应在部署时将`jasypt.encryptor.password`传入环境变量
+    # 注意：应使用jasypt约定的前缀、后缀包裹密文（可自定义），例 - ENC(密文)
+    #
+    # 此密钥由专人管理，研发人员需要填写加密内容时，向管理人员申请，管理人员通过mvn插件（jasypt-maven-plugin）操作涉密内容的加密、解密，
+    # 将加密后的内容给到研发人员，研发人员填入对应的环境配置属性中。
+    # mvn插件加密：mvn jasypt:encrypt-value -Djasypt.encryptor.password="密钥" -Djasypt.plugin.value="涉密信息"
+    # mvn插件解密：mvn jasypt:decrypt-value -Djasypt.encryptor.password="密钥" -Djasypt.plugin.value="密文"
+    #
+    # 相较于直接从部署文件中管理涉密信息或通过分布式配置管理涉密信息的好处：
+    #   1、可以进一步提升涉密信息的安全性（维护部署脚本或分布式配置的人员不一定是可接触涉密信息的人）。
+    #   2、统一各环境配置文件结构的一致性，便于统筹管理配置。
+    #   3、降低部署脚本中属性配置的成本（理想状态下只需配置jasypt.encryptor.password环境变量）。
+    password: xxx

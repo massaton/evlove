@@ -10,12 +10,37 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>monolith</artifactId>
     <name>Monolith Service</name>
 
+    <artifactId>monolith</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
+        <dependency>
+            <groupId>org.evlove.framework</groupId>
+            <artifactId>common-bom-service</artifactId>
+            <!-- Temporarily remove database integration -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.evlove.framework</groupId>
+                    <artifactId>common-integrate-rdb</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- 配置文件中涉密信息进行加密、解密的工具 -->
+            <plugin>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-maven-plugin</artifactId>
+                <version>${jasypt.version}</version>
+            </plugin>
+        </plugins>
+    </build>
 </project>

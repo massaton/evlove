@@ -2,6 +2,7 @@ package org.evlove.common.core.pojo.ro;
 
 import cn.hutool.core.util.PageUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.javatuples.Pair;
@@ -14,10 +15,12 @@ import org.javatuples.Pair;
 public class BasePagingParam extends BaseParam {
     @Schema(description = "Page size (How many records to display per page)", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "pageSize can not be empty")
+    @Min(1)
     private Integer pageSize;
 
     @Schema(description = "Page number", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "pageNum can not be empty")
+    @Min(1)
     private Integer pageNum;
 
     /**
