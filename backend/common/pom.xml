@@ -21,6 +21,7 @@
         <module>common-bom-microservice</module>
         <module>common-bom-microservice-api</module>
         <module>common-integrate-rdb</module>
+        <module>common-integrate-cache</module>
     </modules>
 
 </project>
